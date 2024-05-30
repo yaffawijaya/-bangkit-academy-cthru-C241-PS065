@@ -6,23 +6,35 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.example.finalproject_cthru.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+
 
 class MainActivity : AppCompatActivity() {
 
-
+    private lateinit var binding : ActivityMainBinding
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.mainToolbar)
+
+
         mAuth = FirebaseAuth.getInstance()
 
 
@@ -35,25 +47,29 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val textView = findViewById<TextView>(R.id.name)
-
-        val auth = Firebase.auth
-        val user = auth.currentUser
-
-        if (user != null) {
-            val userName = user.displayName
-            textView.text = "Welcome, " + userName
-        } else {
-            // Handle the case where the user is not signed in
-        }
+//        val textView = findViewById<TextView>(R.id.name)
+//
+//        val auth = Firebase.auth
+//        val user = auth.currentUser
+//
+//        if (user != null) {
+//            val userName = user.displayName
+//            textView.text = "Welcome, " + userName
+//        } else {
+//            // Handle the case where the user is not signed in
+//        }
 
 
 
 // Inside onCreate() method
-        val sign_out_button = findViewById<Button>(R.id.logout_button)
-        sign_out_button.setOnClickListener {
-            signOutAndStartSignInActivity()
-        }
+//        val sign_out_button = findViewById<Button>(R.id.logout_button)
+//        sign_out_button.setOnClickListener {
+//            signOutAndStartSignInActivity()
+//        }
+
+        FragmentSetup()
+
+
     }
 
     private fun signOutAndStartSignInActivity() {
@@ -66,4 +82,20 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun FragmentSetup(){
+        val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_history, R.id.navigation_profile
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
+
+
 }
