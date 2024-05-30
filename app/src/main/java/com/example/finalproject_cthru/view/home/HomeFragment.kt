@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -23,6 +23,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         val dashboardViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
