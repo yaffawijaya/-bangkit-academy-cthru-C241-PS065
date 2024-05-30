@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FinalProject_CThru</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="password_hint">Type Your Password</string>
+    <string name="email_hint">Type your Email</string>
+    <string name="sign_up_text">Not registered yet? Sign Up</string>
+    <string name="sign_in_text">Already registered? Sign In</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="password_confirm_hint">Retype Your Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_history">History</string>
+    <string name="menu_home">Home</string>
+    <string name="test_home_fragment">Ini Home Fragment</string>
+    <string name="test_profile_fragment">Ini Profile Fragment\n</string>
+    <string name="test_history_fragment">Ini History Fragment\n</string>
+
+
+    <string name="maps">Maps</string>
+    <string name="logout">Sign Out</string>
 </resources>
