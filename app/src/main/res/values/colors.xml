@@ -18,4 +18,33 @@
     <color name="buttom_nav_item">#8C706D</color>
     <color name="buttom_nav_selected_item">#220006</color>
     <color name="fragment_bg_color">#FDF8F4</color>
+
+    <!--  Blue Color  -->
+    <color name="blue_1">#E6F3FC</color>
+    <color name="blue_2">#CCE8F8</color>
+    <color name="blue_3">#B3DCF5</color>
+    <color name="blue_4">#99D1F2</color>
+    <color name="blue_5">#66B9EB</color>
+    <color name="blue_6">#33A2E5</color>
+    <color name="blue_7">#008BDE</color>
+    <color name="blue_8">#006FB2</color>
+    <color name="blue_9">#005385</color>
+    <color name="blue_10">#003859</color>
+    <color name="blue_11">#002A43</color>
+    <color name="blue_12">#001C2C</color>
+
+    <!--  Yellow Color  -->
+    <color name="yellow_1">#FFF8ED</color>
+    <color name="yellow_2">#FFF1DC</color>
+    <color name="yellow_3">#FFE9CA</color>
+    <color name="yellow_4">#FFE2B9</color>
+    <color name="yellow_5">#FFD495</color>
+    <color name="yellow_6">#FFC572</color>
+    <color name="yellow_7">#FFB74F</color>
+    <color name="yellow_8">#D4973F</color>
+    <color name="yellow_9">#A8772F</color>
+    <color name="yellow_10">#7D5720</color>
+    <color name="yellow_11">#674718</color>
+    <color name="yellow_12">#513710</color>
+
 </resources>
