@@ -61,7 +61,7 @@ class ProfileFragment : Fragment() {
         googleSignInClient.signOut().addOnCompleteListener(requireActivity()) {
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
-            activity?.finish() // Menutup MainActivity setelah logout
+            activity?.finish()
         }
     }
 

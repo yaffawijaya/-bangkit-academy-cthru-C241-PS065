@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.finalproject_cthru.view.login.LoginActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,28 +40,15 @@ class MainActivity : AppCompatActivity() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-
-
-
-// Inside onCreate() method
-//        val sign_out_button = findViewById<Button>(R.id.logout_button)
-//        sign_out_button.setOnClickListener {
-//            signOutAndStartSignInActivity()
-//        }
-
-        FragmentSetup()
-
-
-    }
-
-    private fun signOutAndStartSignInActivity() {
-        mAuth.signOut()
-
-        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            // Optional: Update UI or show a message to the user
-            val intent = Intent(this@MainActivity, SignInActivity::class.java)
+        // Checking User Current Login
+        if (mAuth.currentUser == null) {
+            // User is not logged in, start the login activity
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        } else {
+            // User is logged in, proceed with the activity
+            FragmentSetup()
         }
     }
 
