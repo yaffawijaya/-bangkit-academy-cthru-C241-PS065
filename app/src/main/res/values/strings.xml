@@ -29,6 +29,27 @@
     <string name="message_main_page">Welcome to Dicoding StoryApp</string>
     <string name="greeting">Hello %1$s,</string>
     <string name="logout">Sign Out</string>
+
+
+    <string name="start">start</string>
+    <string name="skip">Skip</string>
+    <string name="finish">finish</string>
+    <string name="next">next</string>
+    <string name="back">back</string>
+
+
+    <string name="title_onboarding_1"> </string>
+    <string name="description_onboarding_1">Welcome to Cthru, your trusted partner in eye health. </string>
+
+    <string name="title_onboarding_2"> </string>
+    <string name="description_onboarding_2">With our cutting-edge technology, it’s helps you detect cataracts early and easily from the comfort of your home.</string>
+
+    <string name="title_onboarding_3"> </string>
+    <string name="description_onboarding_3">Discover the effective treatments and ensure your eyes receive the care they need</string>
+
+    <string name="title_onboarding_4"> </string>
+    <string name="description_onboarding_4">You\'re all set to begin your journey. Take the first step towards healthier eyes today</string>
+
     <string name="retry">Run Again</string>
 
     <!-- Welcome  -->
