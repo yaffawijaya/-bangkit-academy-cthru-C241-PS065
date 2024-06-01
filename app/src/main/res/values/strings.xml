@@ -4,7 +4,7 @@
     <string name="password_hint">Type Your Password</string>
     <string name="email_hint">Type your Email</string>
     <string name="sign_up_text">Not registered yet? Sign Up</string>
-    <string name="sign_in_text">Already registered? Sign In</string>
+    <string name="sign_in_text">Already registered? Login</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="password_confirm_hint">Retype Your Password</string>
     <!-- TODO: Remove or change this placeholder text -->
