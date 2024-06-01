@@ -25,7 +25,12 @@ class RegisterActivity : AppCompatActivity() {
 
         setupView()
 //        setupAction()
+        setupAction2()
         playAnimation()
+
+    }
+
+    private fun setupAction2(){
 
     }
 
