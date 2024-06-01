@@ -24,15 +24,20 @@ class OnboardingViewPagerAdapter(
                 context.resources.getString(R.string.description_onboarding_2),
                 R.drawable.onboarding2 // Replace with your vector drawable resource ID
             )
-            else -> OnboardingFragment.newInstance(
-                context.resources.getString(R.string.title_onboarding_3),
+            2 -> OnboardingFragment.newInstance(
+                context.resources.getString(R.string.title_onboarding_2),
                 context.resources.getString(R.string.description_onboarding_3),
                 R.drawable.onboarding3 // Replace with your vector drawable resource ID
+            )
+            else -> OnboardingFragment.newInstance(
+                context.resources.getString(R.string.title_onboarding_3),
+                context.resources.getString(R.string.description_onboarding_4),
+                R.drawable.onboarding4 // Replace with your vector drawable resource ID
             )
         }
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 4
     }
 }

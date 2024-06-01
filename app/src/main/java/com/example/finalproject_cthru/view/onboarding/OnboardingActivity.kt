@@ -30,7 +30,7 @@ class OnboardingActivity : AppCompatActivity() {
         btnNext = binding.btnNextStep
         mViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                if (position == 2) {
+                if (position == 3) {
                     btnNext.text = getText(R.string.finish)
                 } else {
                     btnNext.text = getText(R.string.next)
@@ -43,7 +43,7 @@ class OnboardingActivity : AppCompatActivity() {
         TabLayoutMediator(binding.pageIndicator, mViewPager) { _, _ -> }.attach()
 
         btnNext.setOnClickListener {
-            if (getItem() > mViewPager.childCount) {
+            if (getItem() >= 3) {
                 finish()
             } else {
                 mViewPager.setCurrentItem(getItem() + 1, true)

@@ -27,13 +27,16 @@
     <string name="back">back</string>
 
 
-    <string name="title_onboarding_1">Welcome to Onboarding App !</string>
-    <string name="description_onboarding_1">Here is an open-source project which shows sweet &amp; original onboarding ViewPagers that follows Material Design Guidelines</string>
+    <string name="title_onboarding_1"> </string>
+    <string name="description_onboarding_1">Welcome to Cthru, your trusted partner in eye health. </string>
 
-    <string name="title_onboarding_2">Try AirBnB Lottie</string>
-    <string name="description_onboarding_2">We use Lottie Animations on our Intro to make it interactive &amp; pleasant. Did you already tried it ? If no, let\'s start now. It\'s just awesome</string>
+    <string name="title_onboarding_2"> </string>
+    <string name="description_onboarding_2">With our cutting-edge technology, it’s helps you detect cataracts early and easily from the comfort of your home.</string>
 
-    <string name="title_onboarding_3">Code beautiful apps</string>
-    <string name="description_onboarding_3">Our mission is to make useful &amp; subtle apps. We love help people to save time with open-source stuffs, but we also make life easier by creating new things. Good Coding!</string>
+    <string name="title_onboarding_3"> </string>
+    <string name="description_onboarding_3">Discover the effective treatments and ensure your eyes receive the care they need</string>
+
+    <string name="title_onboarding_4"> </string>
+    <string name="description_onboarding_4">You\'re all set to begin your journey. Take the first step towards healthier eyes today</string>
 
 </resources>
