@@ -26,6 +26,12 @@
             android:name=".view.onboarding.OnboardingActivity"
             android:exported="true" />
         <activity
+            android:name=".view.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.register.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.splashscreen.SplashScreenActivity"
             android:exported="false" />
         <activity
