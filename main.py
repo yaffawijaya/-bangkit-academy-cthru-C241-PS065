@@ -20,10 +20,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# home endpoint
 @app.get("/")
 async def root():
     return {"message": "Hello CThru!"}
 
+# Check file size endpoint
 @app.post("/filesize/")
 async def file_size(file: bytes = File(...)):
     length_file = len(file)
@@ -38,6 +40,7 @@ async def file_size(file: bytes = File(...)):
     
     return {"file_size": size}
 
+# prediction endpoint, contains model prediction
 @app.post("/predict/")
 async def predict_endpoint(file: UploadFile = File(...)):
     try:
