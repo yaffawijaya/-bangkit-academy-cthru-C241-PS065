@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.SignInActivity
 import com.example.finalproject_cthru.databinding.ActivityRegisterBinding
+import com.example.finalproject_cthru.view.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            val intent = Intent(this, SignInActivity::class.java)
+                            val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()

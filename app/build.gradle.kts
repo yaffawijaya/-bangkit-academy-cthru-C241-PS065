@@ -17,7 +17,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "AUTH_GOOGLE", "\"242092854808-mlipesalfnbktmdhh11qr2t9i2l1e3kf.apps.googleusercontent.com\"")
+        buildConfigField("String", "AUTH_GOOGLE", "\"788405030945-819vpuo70gncjhlv73nlhrb8h918d0l5.apps.googleusercontent.com\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

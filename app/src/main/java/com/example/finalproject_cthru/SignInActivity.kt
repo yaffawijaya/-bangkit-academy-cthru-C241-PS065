@@ -2,6 +2,7 @@ package com.example.finalproject_cthru
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -73,6 +74,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
