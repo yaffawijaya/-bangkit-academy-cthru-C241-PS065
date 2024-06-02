@@ -12,6 +12,8 @@ def read_image(file: bytes) -> Image.Image:
 
 # Load cataract detection model
 model_cataract = tf.keras.models.load_model('cataract-VGG16.h5')
+
+# Load eye validation model
 model_eye = tf.keras.models.load_model('eyeval-VGG16.h5')
 
 async def predict_cataract(image: Image.Image):
