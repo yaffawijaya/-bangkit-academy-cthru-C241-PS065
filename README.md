@@ -21,6 +21,8 @@ Follow these steps to get the project up and running:
 
     ```sh
     git clone https://github.com/yaffawijaya/cataract-detection-model-api.git
+    ```
+    ```sh
     cd cataract-detection-model-api
     ```
 
@@ -28,6 +30,8 @@ Follow these steps to get the project up and running:
 
     ```sh
     python3 -m venv bangkit
+    ```
+    ```sh
     source bangkit/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
@@ -43,6 +47,7 @@ To run the API locally, use the following command:
 
 ```sh
 uvicorn main:app --reload
+```
 
 ## Test the endpoint `/predict/` 
 

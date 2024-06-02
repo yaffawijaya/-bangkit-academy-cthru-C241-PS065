@@ -40,7 +40,7 @@ async def predict_cataract(image: Image.Image):
 
     return data
 
-# Eye validation model async function
+# Eye validation model async function 
 async def predict_eye(image: Image.Image):
     # Image resizing and formating
     image_array = np.array(image.resize((224, 224))) / 255.0
