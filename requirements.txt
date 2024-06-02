@@ -1,0 +1,8 @@
+fastapi==0.111.0
+numpy==1.26.4
+Pillow==10.3.0
+tensorflow==2.16.1
+uvicorn==0.30.1
+
+# ----- Use this if you are using mac os: -----
+# tensorflow_macos==2.9.0
