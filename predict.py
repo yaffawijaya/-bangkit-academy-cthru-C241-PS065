@@ -16,6 +16,7 @@ model_cataract = tf.keras.models.load_model('cataract-VGG16.h5')
 # Load eye validation model
 model_eye = tf.keras.models.load_model('eyeval-VGG16.h5')
 
+# Cataract model async function
 async def predict_cataract(image: Image.Image):
     # Image resizing and formating
     image_array = np.array(image.resize((224, 224))) / 255.0
@@ -39,6 +40,7 @@ async def predict_cataract(image: Image.Image):
 
     return data
 
+# Eye validation model async function
 async def predict_eye(image: Image.Image):
     # Image resizing and formating
     image_array = np.array(image.resize((224, 224))) / 255.0
