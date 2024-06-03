@@ -24,7 +24,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
@@ -82,30 +85,32 @@ class LoginActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun setupAction2(){
-        // Login Using Email & Password
+    private fun setupAction2() {
+        // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.accountCreateLabel.setOnClickListener{
+
+        // Redirect to RegisterActivity
+        binding.accountCreateLabel.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        // Login Using Email & Password
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val pass = binding.passwordEditText.text.toString()
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Check if we need to link with Google
+                        linkWithGoogleIfNeeded()
                     } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                        Log.d("SignInFailed",it.exception.toString())
+                        Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
+                        Log.d("SignInFailed", task.exception.toString())
                     }
                 }
             } else {
                 Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
-
             }
         }
 
@@ -116,13 +121,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
         binding.googleButton.setOnClickListener {
-            val buildConfigToken = BuildConfig.AUTH_GOOGLE
-            val resourceToken = getString(R.string.default_web_client_id)
-
-            Log.d("SignIn", "BuildConfig.AUTH_GOOGLE: $buildConfigToken")
-            Log.d("SignIn", "R.string.default_web_client_id: $resourceToken")
-
             signIn()
         }
     }
@@ -145,28 +145,82 @@ class LoginActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account.idToken!!)
+                val idToken = account.idToken!!
+                val credential = GoogleAuthProvider.getCredential(idToken, null)
+
+                val currentUser = firebaseAuth.currentUser
+                if (currentUser != null) {
+                    // Check if Google is already linked
+                    if (!isProviderLinked(currentUser, GoogleAuthProvider.PROVIDER_ID)) {
+                        linkAccounts(credential)
+                    } else {
+                        // Google is already linked, no need to link again
+                        Toast.makeText(this, "Google is already linked", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
+                } else {
+                    // Sign in with Google credential
+                    firebaseAuthWithGoogle(credential)
+                }
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.d("SignInFailed","Google sign in failed: ${e.message}")
+                Log.d("SignInFailed", "Google sign in failed: ${e.message}")
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
-                }
+    private fun firebaseAuthWithGoogle(credential: AuthCredential) {
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                val user = firebaseAuth.currentUser
+                Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
             }
+        }
     }
+
+    private fun linkWithGoogleIfNeeded() {
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            // Check if Google is already linked
+            if (!isProviderLinked(user, GoogleAuthProvider.PROVIDER_ID)) {
+                signIn()
+            } else {
+                // Google is already linked, no need to link again
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    private fun linkAccounts(credential: AuthCredential) {
+        val user = firebaseAuth.currentUser
+        user?.linkWithCredential(credential)?.addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                val linkedUser = task.result?.user
+                Toast.makeText(this, "Accounts linked as ${linkedUser?.displayName}", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, "Account linking failed", Toast.LENGTH_SHORT).show()
+                Log.d("LinkFailed", task.exception.toString())
+            }
+        }
+    }
+
+    private fun isProviderLinked(user: FirebaseUser, providerId: String): Boolean {
+        for (profile in user.providerData) {
+            if (profile.providerId == providerId) {
+                return true
+            }
+        }
+        return false
+    }
+
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
