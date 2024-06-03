@@ -17,7 +17,6 @@
     <string name="test_history_fragment">Ini History Fragment\n</string>
 
 
-
     <string name="maps">Maps</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
@@ -95,4 +94,11 @@
     <string name="register">Register</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="continue_with_google">Continue with Google</string>
+
+
+    <!--  Upload Activity  -->
+    <string name="image_warning">Upload Your Image First</string>
+    <string name="camera_button">Start The Camera</string>
+    <string name="gallery_button">Open the Gallery</string>
+    <string name="analyze_button">Analyze</string>
 </resources>
