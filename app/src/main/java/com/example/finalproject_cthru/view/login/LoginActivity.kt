@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        Log.d("SignInFailed",it.exception.toString())
                     }
                 }
             } else {
@@ -115,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        binding.signInButton.setOnClickListener {
+        binding.googleButton.setOnClickListener {
             val buildConfigToken = BuildConfig.AUTH_GOOGLE
             val resourceToken = getString(R.string.default_web_client_id)
 
@@ -128,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun signIn() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(BuildConfig.AUTH_GOOGLE)
             .requestEmail()
             .build()
 
@@ -147,6 +148,7 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.d("SignInFailed","Google sign in failed: ${e.message}")
             }
         }
     }
