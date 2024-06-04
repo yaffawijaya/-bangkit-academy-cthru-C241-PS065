@@ -216,30 +216,30 @@
         app:layout_constraintVertical_bias="0.0"
         tools:alpha="100" />
 
-    <Button
-        android:id="@+id/googleButton"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/google_icon"
-        android:drawablePadding="2dp"
-        android:fontFamily="@font/poppins_semibold_600"
-        android:gravity="center"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/continue_with_google"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_label" />
+<!--    <Button-->
+<!--        android:id="@+id/googleButton"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:drawableLeft="@drawable/google_icon"-->
+<!--        android:drawablePadding="2dp"-->
+<!--        android:fontFamily="@font/poppins_semibold_600"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingStart="10dp"-->
+<!--        android:paddingEnd="10dp"-->
+<!--        android:text="@string/continue_with_google"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        app:cornerRadius="10dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.35"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/account_label" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
