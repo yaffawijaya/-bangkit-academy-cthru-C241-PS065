@@ -20,16 +20,25 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import com.example.finalproject_cthru.R
+import com.example.finalproject_cthru.data.remote.response.FileUploadResponse
+import com.example.finalproject_cthru.data.remote.retrofit.ApiConfig
 import com.example.finalproject_cthru.databinding.ActivityUploadBinding
 import com.example.finalproject_cthru.utils.reduceFileImage
 import com.example.finalproject_cthru.utils.uriToFile
 import com.example.finalproject_cthru.view.camera.CameraActivity
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.HttpException
 
 class UploadActivity : AppCompatActivity() {
 
@@ -68,16 +77,16 @@ class UploadActivity : AppCompatActivity() {
         }
     }
 
-    private var cropImage = registerForActivityResult(
-        CropImageContract()
-    ) { result: CropImageView.CropResult ->
-        if (result.isSuccessful) {
-            val crop =
-                BitmapFactory.decodeFile(result.getUriFilePath(applicationContext, true))
-            binding.uploadImage.setImageBitmap(crop)
-            currentImageUri = result.uriContent
-        }
-    }
+//    private var cropImage = registerForActivityResult(
+//        CropImageContract()
+//    ) { result: CropImageView.CropResult ->
+//        if (result.isSuccessful) {
+//            val crop =
+//                BitmapFactory.decodeFile(result.getUriFilePath(applicationContext, true))
+//            binding.uploadImage.setImageBitmap(crop)
+//            currentImageUri = result.uriContent
+//        }
+//    }
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -96,7 +105,7 @@ class UploadActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.galleryButton.setOnClickListener { startGallery() }
-//        binding.analyzeButton.setOnClickListener { uploadImage() }
+        binding.analyzeButton.setOnClickListener { uploadImage() }
         binding.cameraButton.setOnClickListener { startCameraX() }
 
         if (currentImageUri != null) {
@@ -115,9 +124,44 @@ class UploadActivity : AppCompatActivity() {
         launcherIntentCameraX.launch(intent)
     }
 
+    private fun uploadImage(){
+        currentImageUri?.let { uri ->
+            val imageFile = uriToFile(uri, this).reduceFileImage()
+            Log.d("Image Classification File", "showImage: ${imageFile.path}")
+            showLoading(true)
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                imageFile.name,
+                requestImageFile
+            )
+            lifecycleScope.launch {
+                try {
+                    val apiService = ApiConfig.getApiService()
+                    val successResponse = apiService.uploadImage(multipartBody)
+                    with(successResponse.data){
+                        binding.textView.text = if (isAboveThreshold == true) {
+                            showToast(successResponse.message.toString())
+                            String.format("%s with %.2f%%", result, confidenceScore)
+                        } else {
+                            showToast("Model is predicted successfully but under threshold.")
+                            String.format("Please use the correct picture because  the confidence score is %.2f%%", confidenceScore)
+                        }
+                    }
+                    showLoading(false)
+                } catch (e: HttpException) {
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorResponse = Gson().fromJson(errorBody, FileUploadResponse::class.java)
+                    showToast(errorResponse.message.toString())
+                    showLoading(false)
+                }
+            }
+        } ?: showToast(getString(R.string.empty_image_warning))
+    }
+
     private fun showImage() {
         currentImageUri?.let {
-            cropImage(it)
+//            cropImage(it)
             Log.d("Image URI", "showImage: $it")
             binding.uploadImage.setImageURI(it)
         }
@@ -125,16 +169,16 @@ class UploadActivity : AppCompatActivity() {
         binding.imageView3.visibility = View.GONE
     }
 
-    private fun cropImage(uri:Uri) {
-        cropImage.launch(
-            CropImageContractOptions(
-                uri = uri,
-                cropImageOptions = CropImageOptions(
-                    guidelines = CropImageView.Guidelines.ON
-                )
-            )
-        )
-    }
+//    private fun cropImage(uri:Uri) {
+//        cropImage.launch(
+//            CropImageContractOptions(
+//                uri = uri,
+//                cropImageOptions = CropImageOptions(
+//                    guidelines = CropImageView.Guidelines.ON
+//                )
+//            )
+//        )
+//    }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
