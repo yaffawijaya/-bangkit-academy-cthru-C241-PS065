@@ -27,7 +27,7 @@ import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import com.example.finalproject_cthru.R
-import com.example.finalproject_cthru.data.remote.response.FileUploadResponse
+import com.example.finalproject_cthru.data.remote.response.Response
 import com.example.finalproject_cthru.data.remote.retrofit.ApiConfig
 import com.example.finalproject_cthru.databinding.ActivityUploadBinding
 import com.example.finalproject_cthru.utils.reduceFileImage
@@ -131,27 +131,28 @@ class UploadActivity : AppCompatActivity() {
             showLoading(true)
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
-                "photo",
+                "file",
                 imageFile.name,
                 requestImageFile
             )
             lifecycleScope.launch {
                 try {
-                    val apiService = ApiConfig.getApiService()
+                    val apiService = ApiConfig.getApiService2()
                     val successResponse = apiService.uploadImage(multipartBody)
+                    Log.d("testes","yoyoyo")
                     with(successResponse.data){
-                        binding.textView.text = if (isAboveThreshold == true) {
+//                        binding.textView.text = if (isAboveThreshold == true) {
                             showToast(successResponse.message.toString())
-                            String.format("%s with %.2f%%", result, confidenceScore)
-                        } else {
-                            showToast("Model is predicted successfully but under threshold.")
-                            String.format("Please use the correct picture because  the confidence score is %.2f%%", confidenceScore)
-                        }
+                        binding.confidenceText.text = this?.cataractConfidence?.toString() ?: ""
+//                        } else {
+//                            showToast("Model is predicted successfully but under threshold.")
+//                            String.format("Please use the correct picture because  the confidence score is %.2f%%", confidenceScore)
+//                        }
                     }
                     showLoading(false)
                 } catch (e: HttpException) {
                     val errorBody = e.response()?.errorBody()?.string()
-                    val errorResponse = Gson().fromJson(errorBody, FileUploadResponse::class.java)
+                    val errorResponse = Gson().fromJson(errorBody, Response::class.java)
                     showToast(errorResponse.message.toString())
                     showLoading(false)
                 }
