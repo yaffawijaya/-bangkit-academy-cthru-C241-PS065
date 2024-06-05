@@ -3,6 +3,7 @@
     <string name="sign_in_button">Sign In</string>
     <string name="password_hint">Type Your Password</string>
     <string name="email_hint">Type your Email</string>
+    <string name="name_hint">Type your Name</string>
     <string name="sign_up_text">Not registered yet? Sign Up</string>
     <string name="sign_in_text">Already registered? Login</string>
     <string name="sign_up_button">Sign Up</string>
@@ -101,4 +102,17 @@
     <string name="camera_button">Start The Camera</string>
     <string name="gallery_button">Open the Gallery</string>
     <string name="analyze_button">Analyze</string>
+    <string name="text_error_email_empty">Email masih kosong\n</string>
+    <string name="text_error_email_invalid">Email tidak valid</string>
+    <string name="text_error_pw_empty">Password tidak boleh kosong\n</string>
+    <string name="text_error_pw_lower">Password harus lebih dari 8 character</string>
+    <string name="text_error_name_empty">Name is wrong</string>
+    <string name="text_pw_nomatch">Password not match</string>
+    <string name="text_dialog_change_pw">Check Email</string>
+    <string name="text_back">kembali</string>
+    <string name="text_dialog_logout">apakah ingin logout</string>
+    <string name="text_doalog_logout_back">kembali</string>
+    <string name="text_button_logout">logout</string>
+    <string name="text_link_edit_profile_success">success</string>
+    <string name="text_link_edit_profile_failed">failed</string>
 </resources>
