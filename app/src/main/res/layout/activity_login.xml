@@ -47,7 +47,7 @@
         android:alpha="0"
         app:boxBackgroundColor="@color/white"
         app:boxBackgroundMode="filled"
-        app:boxStrokeColor="@color/yellow"
+        app:boxStrokeColor="@color/SearchBar"
         app:hintTextColor="@color/yellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
