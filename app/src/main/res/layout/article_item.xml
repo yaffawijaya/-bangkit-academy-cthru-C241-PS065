@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ECBBBB"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="139dp"
+            android:layout_height="79dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.025"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.545"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="212dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Tiga Tahun Terakhir, Temuan Kasus TBC Anak di Indonesia Meningkat"
+            android:textAlignment="viewStart"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/newsImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/newsImage"
+            app:layout_constraintTop_toTopOf="@id/newsImage"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintWidth_max="229dp"
+            app:layout_constraintWidth_min="0dp"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/newsDescription"
+            android:layout_width="212dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="3"
+            android:text="Epidemiolog dari Tim Kerja TBC Kementerian Kesehatan Sulistyo mengatakan dalam “Membangun Indonesia Emas, Lindungi Anak dan Remaja dari TBC!”"
+            android:textAlignment="textStart"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/newsImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/newsImage"
+            app:layout_constraintTop_toBottomOf="@id/newsTitle"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintWidth_max="229dp"
+            app:layout_constraintWidth_min="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

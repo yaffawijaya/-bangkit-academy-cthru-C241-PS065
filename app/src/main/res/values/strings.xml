@@ -102,4 +102,51 @@
     <string name="gallery_button">Open the Gallery</string>
     <string name="analyze_button">Analyze</string>
     <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu</string>
+    <string name="hint">Search Your Article\n</string>
+
+
+    <!--  Detail Article Activity  -->
+    <string name="detail_title_article">Lorem ipsum dolor sit amet consectetur. Molestie vel ultrices diam tempus.</string>
+    <string name="detail_desc_article">Lorem ipsum dolor sit amet consectetur. Molestie vel ultrices diam tempus semper sit tincidunt eget blandit. Cras faucibus mattis tortor ut facilisi ullamcorper. Condimentum lectus elit nulla congue. In blandit purus maecenas quis risus volutpat habitant. Integer egestas arcu nunc netus sed lorem porttitor quis</string>
+
+    <!--  Result Article Activity  -->
+    <string name="prediction_result">Prediction Result:</string>
+    <string name="prediction_confidence">Prediction Confidence:</string>
+    <string name="percent">0%</string>
+    <string name="maps_link_buttom">Check the closest medical center</string>
+    <string name="recommended_tips">Recommended Tips :</string>
+
+        <!-- Tips 1   -->
+    <string name="tips1_title">1. Memeriksakan kondisi mata secara rutin</string>
+    <string name="tips1_detail">Orang dewasa dianjurkan untuk memeriksakan mata ke dokter setiap dua tahun sekali sampai usia 50 tahun. Di atas usia 50 tahun, Anda disarankan untuk memeriksakan mata setidaknya setahun sekali.
+Sementara itu, orang dengan riwayat diabetes lebih berisiko mengalami penyakit mata sehingga disarankan untuk lebih sering memeriksakan kondisi mata.</string>
+
+        <!-- Tips 2   -->
+    <string name="tips2_title">2. Melindungi mata dari paparan sinar UV</string>
+    <string name="tips2_detail">Paparan sinar ultraviolet pada mata dapat meningkatkan risiko terjadinya mata katarak. Selain itu, sinar UV juga bisa membuat katarak menjadi makin parah. Ini karena sinar ultraviolet dapat merusak protein di lensa mata.
+Untuk mencegah mata katarak, hindari paparan sinar matahari langsung dengan menggunakan kacamata hitam atau topi lebar, terutama saat sedang beraktivitas di bawah terik matahari langsung.
+Pilihlah kacamata hitam yang dapat memblokir setidaknya 99% sinar UV dan berukuran lebar, sehingga perlindungan yang Anda dapatkan maksimal.</string>
+
+        <!-- Tips 3   -->
+    <string name="tips3_title">3. Menghentikan kebiasaan merokok</string>
+    <string name="tips3_detail">Kebiasaan merokok dapat meningkatkan risiko terkena mata katarak karena menciptakan lebih banyak radikal bebas di mata Anda. Guna menurunkan risiko mata katarak, Anda disarankan untuk mengurangi atau menghentikan kebiasaan merokok. Jika upaya ini terlalu berat, cobalah berkonsultasi dengan dokter.</string>
+
+    <!--  Profile Fragment  -->
+    <string name="user_profile">Andrew Nathan</string>
+    <string name="title_email_profile">Email</string>
+    <string name="email_profile">andrewnathan@gmail.com</string>
+    <string name="title_number_profile">Phone Number</string>
+    <string name="number_profile">081338275638</string>
+    <string name="title_age_profile">Age</string>
+    <string name="age_profile">26</string>
+    <string name="google_profile">Connect with Google</string>
+    <string name="language_profile">Language</string>
+    <string name="darkmode_profile">Dark Mode</string>
+    <string name="customer_profile">Customer Support</string>
+    <string name="version_profile">Version Info</string>
+    <string name="about_profile">About</string>
+    <string name="logout_profile">Logout</string>
+    <string name="settingpref_profile"><![CDATA[Settings & Preferences]]></string>
+
+
 </resources>
