@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.FragmentProfileBinding
 import com.example.finalproject_cthru.view.login.LoginActivity
@@ -41,6 +39,11 @@ class ProfileFragment : Fragment() {
 
         binding.logoutButton.setOnClickListener {
             signOut()
+        }
+
+        binding.editButton.setOnClickListener {
+            val intent = Intent(activity, ProfileEditActivity::class.java)
+            startActivity(intent)
         }
 
         return root
