@@ -24,6 +24,14 @@
         android:theme="@style/Theme.FinalProject_CThru"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBsfee8YepGnw-0QGhWSFmXniudcCkMsvU" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
         <activity
             android:name=".view.article.ArticleActivity"
             android:exported="false" />
@@ -31,13 +39,13 @@
             android:name=".view.detailarticle.DetailArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".view.upload.UploadActivity"
+            android:name=".view.camera.CameraActivity"
             android:exported="false" />
         <activity
             android:name=".view.profile.ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".view.camera.CameraActivity"
+            android:name=".view.upload.UploadActivity"
             android:exported="false" />
         <activity
             android:name=".view.result.ResultActivity"
@@ -61,7 +69,7 @@
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.maps.MapsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
