@@ -1,5 +1,6 @@
 package com.example.finalproject_cthru.view.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -43,10 +44,18 @@ class ProfileFragment : Fragment() {
 
         binding.editButton.setOnClickListener {
             val intent = Intent(activity, ProfileEditActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
         }
 
         return root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_PROFILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Handle the result from ProfileEditActivity
+            // Update UI or refresh data if needed
+        }
     }
 
     private fun displayUserInfo() {
@@ -71,5 +80,9 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val EDIT_PROFILE_REQUEST_CODE = 1
     }
 }

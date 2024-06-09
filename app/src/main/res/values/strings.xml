@@ -110,8 +110,8 @@
     <string name="detail_desc_article">Lorem ipsum dolor sit amet consectetur. Molestie vel ultrices diam tempus semper sit tincidunt eget blandit. Cras faucibus mattis tortor ut facilisi ullamcorper. Condimentum lectus elit nulla congue. In blandit purus maecenas quis risus volutpat habitant. Integer egestas arcu nunc netus sed lorem porttitor quis</string>
 
     <!--  Result Article Activity  -->
-    <string name="prediction_result">Prediction Result:</string>
-    <string name="prediction_confidence">Prediction Confidence:</string>
+    <string name="prediction_result">Cataract Confidence:</string>
+    <string name="prediction_confidence">Eye Confidence:</string>
     <string name="percent">0%</string>
     <string name="maps_link_buttom">Check the closest medical center</string>
     <string name="recommended_tips">Recommended Tips :</string>

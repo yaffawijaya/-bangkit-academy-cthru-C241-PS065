@@ -1,5 +1,6 @@
 package com.example.finalproject_cthru.view.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.finalproject_cthru.MainActivity
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.view.adapter.OnboardingViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,6 +34,10 @@ class OnboardingActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 if (position == 3) {
                     btnNext.text = getText(R.string.finish)
+                    btnNext.setOnClickListener {
+                        val intent = Intent(this@OnboardingActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    }
                 } else {
                     btnNext.text = getText(R.string.next)
                 }
