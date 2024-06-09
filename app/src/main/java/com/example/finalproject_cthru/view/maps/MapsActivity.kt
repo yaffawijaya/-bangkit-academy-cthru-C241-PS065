@@ -41,7 +41,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val locationViewModel: MapsViewModel by viewModels<MapsViewModel>()
     private val boundsBuilder = LatLngBounds.Builder()
 
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val requestPermissionLauncher =
@@ -79,16 +78,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-
-
-
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     private fun zoomOnMap(latLng: LatLng){
         val newLatLng =  CameraUpdateFactory.newLatLngZoom(latLng,12f)
-        mMap?.animateCamera(newLatLng)
+        mMap.animateCamera(newLatLng)
+        mMap.addMarker(MarkerOptions().position(latLng).title("Selected Location"))
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -96,19 +92,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.uiSettings.apply {
             isZoomControlsEnabled = true
-//            isCompassEnabled = true
+            isCompassEnabled = true
             isIndoorLevelPickerEnabled = true
             isMapToolbarEnabled = true
-            isMyLocationButtonEnabled = true
+            isMyLocationButtonEnabled = false
         }
-
 
         getMyLocation()
         setMapStyle()
         setTraffic()
-//        getMapStory()
-
-
     }
 
     private fun getMyLocation() {
@@ -152,9 +144,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 menuInflater.inflate(R.menu.map_type_menu, popupMenu.menu)
                 setOnMenuItemClickListener { item ->
                     when (item.itemId) {
-                        R.id.btnNormal -> mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
-                        R.id.btnSatellite -> mMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                        R.id.btnTerrain -> mMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                        R.id.btnNormal -> mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+                        R.id.btnSatellite -> mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                        R.id.btnTerrain -> mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
                     }
                     true
                 }
@@ -166,22 +158,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun setTraffic(){
         binding.enableTraffic.setOnClickListener {
-
             if (isTrafficEnable) {
-                mMap?.apply {
+                mMap.apply {
                     isTrafficEnabled = false
                     isTrafficEnable = false
                 }
             } else {
-                mMap?.apply {
+                mMap.apply {
                     isTrafficEnabled = true
                     isTrafficEnable = true
                 }
             }
         }
     }
-
-
 
     companion object {
         private const val TAG = "MapsActivity"

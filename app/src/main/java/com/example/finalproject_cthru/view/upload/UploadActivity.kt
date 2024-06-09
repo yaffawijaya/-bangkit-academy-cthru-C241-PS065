@@ -72,7 +72,9 @@ class UploadActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
-            currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
+            val uriString = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)
+            currentImageUri = uriString?.toUri()
+            Log.d("UploadActivity", "Received URI from CameraActivity: $currentImageUri")
             showImage()
         }
     }
@@ -162,9 +164,16 @@ class UploadActivity : AppCompatActivity() {
 
     private fun showImage() {
         currentImageUri?.let {
-//            cropImage(it)
-            Log.d("Image URI", "showImage: $it")
-            binding.uploadImage.setImageURI(it)
+            Log.d("UploadActivity", "Displaying image: $it")
+            try {
+                binding.uploadImage.setImageURI(it)
+            } catch (e: Exception) {
+                Log.e("UploadActivity", "Error displaying image: $e")
+                showToast("Error displaying image")
+            }
+        } ?: run {
+            Log.e("UploadActivity", "currentImageUri is null")
+            showToast("No image to display")
         }
         binding.imageinfo.visibility = View.GONE
         binding.imageView3.visibility = View.GONE
