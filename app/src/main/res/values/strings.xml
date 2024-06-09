@@ -116,18 +116,18 @@
     <string name="maps_link_buttom">Check the closest medical center</string>
     <string name="recommended_tips">Recommended Tips :</string>
 
-        <!-- Tips 1   -->
+    <!-- Tips 1   -->
     <string name="tips1_title">1. Memeriksakan kondisi mata secara rutin</string>
     <string name="tips1_detail">Orang dewasa dianjurkan untuk memeriksakan mata ke dokter setiap dua tahun sekali sampai usia 50 tahun. Di atas usia 50 tahun, Anda disarankan untuk memeriksakan mata setidaknya setahun sekali.
 Sementara itu, orang dengan riwayat diabetes lebih berisiko mengalami penyakit mata sehingga disarankan untuk lebih sering memeriksakan kondisi mata.</string>
 
-        <!-- Tips 2   -->
+    <!-- Tips 2   -->
     <string name="tips2_title">2. Melindungi mata dari paparan sinar UV</string>
     <string name="tips2_detail">Paparan sinar ultraviolet pada mata dapat meningkatkan risiko terjadinya mata katarak. Selain itu, sinar UV juga bisa membuat katarak menjadi makin parah. Ini karena sinar ultraviolet dapat merusak protein di lensa mata.
 Untuk mencegah mata katarak, hindari paparan sinar matahari langsung dengan menggunakan kacamata hitam atau topi lebar, terutama saat sedang beraktivitas di bawah terik matahari langsung.
 Pilihlah kacamata hitam yang dapat memblokir setidaknya 99% sinar UV dan berukuran lebar, sehingga perlindungan yang Anda dapatkan maksimal.</string>
 
-        <!-- Tips 3   -->
+    <!-- Tips 3   -->
     <string name="tips3_title">3. Menghentikan kebiasaan merokok</string>
     <string name="tips3_detail">Kebiasaan merokok dapat meningkatkan risiko terkena mata katarak karena menciptakan lebih banyak radikal bebas di mata Anda. Guna menurunkan risiko mata katarak, Anda disarankan untuk mengurangi atau menghentikan kebiasaan merokok. Jika upaya ini terlalu berat, cobalah berkonsultasi dengan dokter.</string>
 
