@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.ActivityMapsBinding
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,6 +24,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -30,6 +35,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private var isTrafficEnable: Boolean = false
+    private lateinit var autocompleteFragment: AutocompleteSupportFragment
     private lateinit var currentLocation: Location
     private var radius = 1500
     private val locationViewModel: MapsViewModel by viewModels<MapsViewModel>()
@@ -49,7 +55,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -60,7 +65,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        Places.initialize(applicationContext, getString(R.string.google_api))
+        autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,Place.Field.ADDRESS, Place.Field.LAT_LNG))
+        autocompleteFragment.setOnPlaceSelectedListener(object:PlaceSelectionListener{
+            override fun onError(p0: Status){
+                Toast.makeText(this@MapsActivity,"Some Error in Search",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onPlaceSelected(place: Place) {
+                val latLng = place.latLng!!
+                zoomOnMap(latLng)
+            }
+        })
+
+
+
+
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+    }
+
+    private fun zoomOnMap(latLng: LatLng){
+        val newLatLng =  CameraUpdateFactory.newLatLngZoom(latLng,12f)
+        mMap?.animateCamera(newLatLng)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -68,10 +96,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.uiSettings.apply {
             isZoomControlsEnabled = true
-            isCompassEnabled = true
-            isIndoorLevelPickerEnabled = false
-            isMapToolbarEnabled = false
-            isMyLocationButtonEnabled = false
+//            isCompassEnabled = true
+            isIndoorLevelPickerEnabled = true
+            isMapToolbarEnabled = true
+            isMyLocationButtonEnabled = true
         }
 
 
