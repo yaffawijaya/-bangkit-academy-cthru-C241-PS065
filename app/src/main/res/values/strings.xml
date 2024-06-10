@@ -147,7 +147,11 @@ Pilihlah kacamata hitam yang dapat memblokir setidaknya 99% sinar UV dan berukur
     <string name="about_profile">About</string>
     <string name="logout_profile">Logout</string>
     <string name="settingpref_profile"><![CDATA[Settings & Preferences]]></string>
-
-
     <string name="settings_preferences"><![CDATA[Settings & Preferences]]></string>
+    <string name="title_history">Today\'s Checkup\n</string>
+    <string name="btn_check_history">Let\'s Get Started</string>
+    <string name="log_history">Log History</string>
+
+    <!--  History Fragment  -->
+
 </resources>
