@@ -7,9 +7,12 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
@@ -33,6 +36,8 @@ import com.example.finalproject_cthru.databinding.ActivityUploadBinding
 import com.example.finalproject_cthru.utils.reduceFileImage
 import com.example.finalproject_cthru.utils.uriToFile
 import com.example.finalproject_cthru.view.camera.CameraActivity
+import com.example.finalproject_cthru.view.home.HomeFragment
+import com.example.finalproject_cthru.view.result.ResultActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
