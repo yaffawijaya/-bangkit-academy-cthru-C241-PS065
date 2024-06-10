@@ -30,7 +30,7 @@
             android:value="AIzaSyBsfee8YepGnw-0QGhWSFmXniudcCkMsvU" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.maps.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".view.article.ArticleActivity"
@@ -69,7 +69,7 @@
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".view.maps.MapsActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
