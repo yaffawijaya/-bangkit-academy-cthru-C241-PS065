@@ -65,7 +65,7 @@
 
     <string name="password_login">Enter your password</string>
     <string name="password_confirm">Confirm your password</string>
-    <string name="password_forgot">Show Password?</string>
+    <string name="password_forgot">Forgot Password?</string>
     <string name="password_less">Password must be at least 8 characters</string>
     <string name="password_NotMatch">Passwords don\'t match</string>
     <string name="password_AccountWrong">The password you entered is incorrect</string>

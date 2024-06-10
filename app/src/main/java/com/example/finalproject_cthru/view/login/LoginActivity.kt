@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         setupView()
 //        setupAction()
         setupAction2()
+        forgotPassword()
         playAnimation()
 
     }
@@ -222,6 +223,21 @@ class LoginActivity : AppCompatActivity() {
 //        }
 //        return false
 //    }
+
+    private fun forgotPassword(){
+        val email = binding.emailEditText.text.toString()
+        if (email.isNotEmpty()) {
+            firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Password reset email sent.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(this, "Please enter your email address.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     private fun playAnimation() {

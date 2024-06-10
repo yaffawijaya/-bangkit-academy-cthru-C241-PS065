@@ -32,7 +32,7 @@ class ArticleActivity : AppCompatActivity() {
 
         adapter = ArticleAdapter()
         setupSearchBar()
-        setupRecylerView()
+//        setupRecylerView()
         observeLiveData()
     }
 
@@ -60,19 +60,19 @@ class ArticleActivity : AppCompatActivity() {
         binding.rvAdapter.adapter = adapter
     }
 
-    private fun setupRecylerView() {
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvAdapter.layoutManager = layoutManager
-        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        binding.rvAdapter.addItemDecoration(itemDecoration)
-        adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: ArticlesItem) {
-                val intent = Intent(this@ArticleActivity, DetailArticleActivity::class.java)
-                intent.putExtra(DetailArticleActivity.EXTRA_USER, data)
-                startActivity(intent)
-            }
-        })
-    }
+//    private fun setupRecylerView() {
+//        val layoutManager = LinearLayoutManager(this)
+//        binding.rvAdapter.layoutManager = layoutManager
+//        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+//        binding.rvAdapter.addItemDecoration(itemDecoration)
+//        adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
+//            override fun onItemClicked(data: ArticlesItem) {
+//                val intent = Intent(this@ArticleActivity, DetailArticleActivity::class.java)
+//                intent.putExtra(DetailArticleActivity.EXTRA_USER, data)
+//                startActivity(intent)
+//            }
+//        })
+//    }
 
     private fun setupSearchBar(){
         with(binding) {
