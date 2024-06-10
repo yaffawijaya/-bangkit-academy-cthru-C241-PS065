@@ -70,8 +70,16 @@ class UploadActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
-            currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
-            showImage()
+            val uriString = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)
+            if (uriString != null) {
+                currentImageUri = Uri.parse(uriString)
+                Log.d("UploadActivity", "Received image URI: $currentImageUri")
+                showImage()
+            } else {
+                Log.e("UploadActivity", "No image URI returned")
+            }
+        } else {
+            Log.e("UploadActivity", "Camera activity result not OK")
         }
     }
 

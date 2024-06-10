@@ -1,5 +1,6 @@
 package com.example.finalproject_cthru.view.history
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.FragmentHistoryBinding
+import com.example.finalproject_cthru.view.camera.CameraActivity
+import com.example.finalproject_cthru.view.upload.UploadActivity
 
 
 class HistoryFragment : Fragment() {
@@ -31,6 +34,12 @@ class HistoryFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        binding.analyzeButton.setOnClickListener {
+            val intent = Intent(requireActivity(), UploadActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
+
         return root
     }
 
