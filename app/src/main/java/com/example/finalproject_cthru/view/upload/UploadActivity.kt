@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,12 +14,15 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.canhub.cropper.CropImageContract
@@ -166,6 +170,7 @@ class UploadActivity : AppCompatActivity() {
                 try {
                     val apiService = ApiConfig.getApiService2()
                     val successResponse = apiService.uploadImage(multipartBody)
+                    Log.d("testes","yoyoyo")
                     with(successResponse.data){
                         showToast(successResponse.message.toString())
 
@@ -198,9 +203,16 @@ class UploadActivity : AppCompatActivity() {
 
     private fun showImage() {
         currentImageUri?.let {
-//            cropImage(it)
-            Log.d("Image URI", "showImage: $it")
-            binding.uploadImage.setImageURI(it)
+            Log.d("UploadActivity", "Displaying image: $it")
+            try {
+                binding.uploadImage.setImageURI(it)
+            } catch (e: Exception) {
+                Log.e("UploadActivity", "Error displaying image: $e")
+                showToast("Error displaying image")
+            }
+        } ?: run {
+            Log.e("UploadActivity", "currentImageUri is null")
+            showToast("No image to display")
         }
         binding.imageinfo.visibility = View.GONE
         binding.imageView3.visibility = View.GONE

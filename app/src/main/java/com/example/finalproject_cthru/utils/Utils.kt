@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.example.finalproject_cthru.BuildConfig
@@ -24,45 +25,23 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
-private const val MAXIMAL_SIZE = 1000000 //1 MB
-private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
-private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
+private const val MAXIMAL_SIZE = 1000000
+private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+private val timeStamp: String = SimpleDateFormat(
+    FILENAME_FORMAT,
+    Locale.US
+).format(Date())
+private const val TIMESTAMP_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
-fun getImageUri(context: Context): Uri {
-    var uri: Uri? = null
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, "$timeStamp.jpg")
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/MyCamera/")
-        }
-        uri = context.contentResolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            contentValues
-        )
-        // content://media/external/images/media/1000000062
-        // storage/emulated/0/Pictures/MyCamera/20230825_155303.jpg
-    }
-    return uri ?: getImageUriForPreQ(context)
-}
-
-private fun getImageUriForPreQ(context: Context): Uri {
-    val filesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val imageFile = File(filesDir, "/MyCamera/$timeStamp.jpg")
-    if (imageFile.parentFile?.exists() == false) imageFile.parentFile?.mkdir()
-    return FileProvider.getUriForFile(
-        context,
-        "${BuildConfig.APPLICATION_ID}.fileprovider",
-        imageFile
-    )
-    //content://com.dicoding.picodiploma.mycamera.fileprovider/my_images/MyCamera/20230825_133659.jpg
-}
-
+//  Fungsi ini digunakan untuk membuat file gambar sementara di direktori cache eksternal aplikasi
 fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
-    return File.createTempFile(timeStamp, ".jpg", filesDir)
+    val tempFile = File.createTempFile(timeStamp, ".jpg", filesDir)
+    Log.d("Utils", "Temp file created: ${tempFile.path}")
+    return tempFile
 }
 
+//  Fungsi ini digunakan untuk mengonversi URI gambar menjadi file gambar
 fun uriToFile(imageUri: Uri, context: Context): File {
     val myFile = createCustomTempFile(context)
     val inputStream = context.contentResolver.openInputStream(imageUri) as InputStream
@@ -75,6 +54,8 @@ fun uriToFile(imageUri: Uri, context: Context): File {
     return myFile
 }
 
+//  1. Fungsi ini bertujuan untuk mengompres gambar yang ada dalam file jika ukurannya melebihi ukuran maksimum yang ditentukan (MAXIMAL_SIZE)
+//  2. Ini dilakukan dengan mengurangi kualitas gambar secara berulang hingga ukuran gambar sesuai dengan batasan yang ditetapkan
 fun File.reduceFileImage(): File {
     val file = this
     val bitmap = BitmapFactory.decodeFile(file.path).getRotatedBitmap(file)
@@ -111,6 +92,20 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+fun String.withDateFormat(): String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    val date = format.parse(this) as Date
+    return DateFormat.getDateInstance(DateFormat.FULL).format(date)
+}
+
+fun getTimeMillisFromString(dateTimeString: String): Long {
+    val sdf = SimpleDateFormat(TIMESTAMP_PATTERN)
+    sdf.timeZone = TimeZone.getTimeZone("UTC")
+    val date = sdf.parse(dateTimeString) as Date
+    return date.time
+}
+
 
 
 
