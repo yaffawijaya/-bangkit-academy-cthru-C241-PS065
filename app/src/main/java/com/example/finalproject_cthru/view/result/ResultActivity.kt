@@ -11,6 +11,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.ActivityResultBinding
+import com.example.finalproject_cthru.view.login.LoginActivity
+import com.example.finalproject_cthru.view.maps.MapsActivity
 
 class ResultActivity : AppCompatActivity() {
 
@@ -28,6 +30,11 @@ class ResultActivity : AppCompatActivity() {
             // Add any result data if needed
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
+        }
+
+        binding.mapsButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
         }
     }
 
