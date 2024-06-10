@@ -1,7 +1,11 @@
 package com.example.finalproject_cthru
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -17,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.finalproject_cthru.view.login.LoginActivity
+import com.example.finalproject_cthru.view.onboarding.OnboardingActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +34,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (isNewInstall()) {
+            // Start the onboarding activity
+            val intent = Intent(this, OnboardingActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
 
         mAuth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -46,7 +59,33 @@ class MainActivity : AppCompatActivity() {
         } else {
             // User is logged in, proceed with the activity
             FragmentSetup()
+            setupView()
         }
+    }
+
+    private fun isNewInstall(): Boolean {
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        val isFirstLaunch = sharedPref.getBoolean("isFirstLaunch", true)
+        if (isFirstLaunch) {
+            with(sharedPref.edit()) {
+                putBoolean("isFirstLaunch", false)
+                apply()
+            }
+        }
+        return isFirstLaunch
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     private fun FragmentSetup(){

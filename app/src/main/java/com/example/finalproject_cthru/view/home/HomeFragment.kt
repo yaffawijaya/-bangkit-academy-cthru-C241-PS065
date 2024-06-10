@@ -1,5 +1,6 @@
 package com.example.finalproject_cthru.view.home
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.FragmentHomeBinding
 import com.example.finalproject_cthru.view.onboarding.OnboardingActivity
+import com.example.finalproject_cthru.view.profile.ProfileFragment
+import com.example.finalproject_cthru.view.upload.UploadActivity
 
 class HomeFragment : Fragment() {
 
@@ -38,15 +41,27 @@ class HomeFragment : Fragment() {
         // Use binding to access the button
         val button: Button = binding.onboardingButton
         button.setOnClickListener {
-            val intent = Intent(activity, OnboardingActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(activity, UploadActivity::class.java)
+            startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
         }
 
         return root
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_PROFILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Handle the result from ProfileEditActivity
+            // Update UI or refresh data if needed
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val EDIT_PROFILE_REQUEST_CODE = 1
     }
 }

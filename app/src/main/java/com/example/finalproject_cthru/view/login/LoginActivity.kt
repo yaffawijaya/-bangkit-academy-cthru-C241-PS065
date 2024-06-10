@@ -103,7 +103,9 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // Check if we need to link with Google
-                        linkWithGoogleIfNeeded()
+//                        linkWithGoogleIfNeeded()
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     } else {
                         Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
                         Log.d("SignInFailed", task.exception.toString())
@@ -115,111 +117,111 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Login Using Google Button
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        binding.googleButton.setOnClickListener {
-            signIn()
-        }
+//        val currentUser = firebaseAuth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//
+//        binding.googleButton.setOnClickListener {
+//            signIn()
+//        }
     }
 
-    private fun signIn() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(BuildConfig.AUTH_GOOGLE)
-            .requestEmail()
-            .build()
+//    private fun signIn() {
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(BuildConfig.AUTH_GOOGLE)
+//            .requestEmail()
+//            .build()
+//
+//        googleSignInClient = GoogleSignIn.getClient(this, gso)
+//        val signInIntent = googleSignInClient.signInIntent
+//        startActivityForResult(signInIntent, RC_SIGN_IN)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            try {
+//                val account = task.getResult(ApiException::class.java)
+//                val idToken = account.idToken!!
+//                val credential = GoogleAuthProvider.getCredential(idToken, null)
+//
+//                val currentUser = firebaseAuth.currentUser
+//                if (currentUser != null) {
+//                    // Check if Google is already linked
+//                    if (!isProviderLinked(currentUser, GoogleAuthProvider.PROVIDER_ID)) {
+//                        linkAccounts(credential)
+//                    } else {
+//                        // Google is already linked, no need to link again
+//                        Toast.makeText(this, "Google is already linked", Toast.LENGTH_SHORT).show()
+//                        startActivity(Intent(this, MainActivity::class.java))
+//                        finish()
+//                    }
+//                } else {
+//                    // Sign in with Google credential
+//                    firebaseAuthWithGoogle(credential)
+//                }
+//            } catch (e: ApiException) {
+//                Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+//                Log.d("SignInFailed", "Google sign in failed: ${e.message}")
+//            }
+//        }
+//    }
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                val idToken = account.idToken!!
-                val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-                val currentUser = firebaseAuth.currentUser
-                if (currentUser != null) {
-                    // Check if Google is already linked
-                    if (!isProviderLinked(currentUser, GoogleAuthProvider.PROVIDER_ID)) {
-                        linkAccounts(credential)
-                    } else {
-                        // Google is already linked, no need to link again
-                        Toast.makeText(this, "Google is already linked", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
-                    }
-                } else {
-                    // Sign in with Google credential
-                    firebaseAuthWithGoogle(credential)
-                }
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
-                Log.d("SignInFailed", "Google sign in failed: ${e.message}")
-            }
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(credential: AuthCredential) {
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                val user = firebaseAuth.currentUser
-                Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun linkWithGoogleIfNeeded() {
-        val user = firebaseAuth.currentUser
-        if (user != null) {
-            // Check if Google is already linked
-            if (!isProviderLinked(user, GoogleAuthProvider.PROVIDER_ID)) {
-                signIn()
-            } else {
-                // Google is already linked, no need to link again
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
-    }
-
-    private fun linkAccounts(credential: AuthCredential) {
-        val user = firebaseAuth.currentUser
-        user?.linkWithCredential(credential)?.addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                val linkedUser = task.result?.user
-                Toast.makeText(this, "Accounts linked as ${linkedUser?.displayName}", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(this, "Account linking failed", Toast.LENGTH_SHORT).show()
-                Log.d("LinkFailed", task.exception.toString())
-            }
-        }
-    }
-
-    private fun isProviderLinked(user: FirebaseUser, providerId: String): Boolean {
-        for (profile in user.providerData) {
-            if (profile.providerId == providerId) {
-                return true
-            }
-        }
-        return false
-    }
+//    private fun firebaseAuthWithGoogle(credential: AuthCredential) {
+//        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+//            if (task.isSuccessful) {
+//                val user = firebaseAuth.currentUser
+//                Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+//                startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+//            } else {
+//                Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+//
+//    private fun linkWithGoogleIfNeeded() {
+//        val user = firebaseAuth.currentUser
+//        if (user != null) {
+//            // Check if Google is already linked
+//            if (!isProviderLinked(user, GoogleAuthProvider.PROVIDER_ID)) {
+//                signIn()
+//            } else {
+//                // Google is already linked, no need to link again
+//                startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+//            }
+//        }
+//    }
+//
+//    private fun linkAccounts(credential: AuthCredential) {
+//        val user = firebaseAuth.currentUser
+//        user?.linkWithCredential(credential)?.addOnCompleteListener(this) { task ->
+//            if (task.isSuccessful) {
+//                val linkedUser = task.result?.user
+//                Toast.makeText(this, "Accounts linked as ${linkedUser?.displayName}", Toast.LENGTH_SHORT).show()
+//                startActivity(Intent(this, MainActivity::class.java))
+//                finish()
+//            } else {
+//                Toast.makeText(this, "Account linking failed", Toast.LENGTH_SHORT).show()
+//                Log.d("LinkFailed", task.exception.toString())
+//            }
+//        }
+//    }
+//
+//    private fun isProviderLinked(user: FirebaseUser, providerId: String): Boolean {
+//        for (profile in user.providerData) {
+//            if (profile.providerId == providerId) {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 
     private fun playAnimation() {
@@ -240,7 +242,7 @@ class LoginActivity : AppCompatActivity() {
         val button = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(400)
         val account_label = ObjectAnimator.ofFloat(binding.accountLabel, View.ALPHA, 1f).setDuration(400)
         val account_create_label = ObjectAnimator.ofFloat(binding.accountCreateLabel, View.ALPHA, 1f).setDuration(400)
-        val google_button = ObjectAnimator.ofFloat(binding.googleButton, View.ALPHA, 1f).setDuration(400)
+//        val google_button = ObjectAnimator.ofFloat(binding.googleButton, View.ALPHA, 1f).setDuration(400)
 
         AnimatorSet().apply {
             playSequentially(
@@ -254,7 +256,7 @@ class LoginActivity : AppCompatActivity() {
                 button,
                 account_label,
                 account_create_label,
-                google_button
+//                google_button
             )
             startDelay = 100
         }.start()
