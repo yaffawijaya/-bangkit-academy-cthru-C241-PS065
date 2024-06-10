@@ -34,6 +34,8 @@
         <activity
             android:name=".view.maps.MapsActivity"
             android:exported="false" />
+        <activity android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
         <activity
             android:name=".view.article.ArticleActivity"
             android:exported="false" />
@@ -50,7 +52,7 @@
             android:name=".view.upload.UploadActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.result.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".view.onboarding.OnboardingActivity"
@@ -71,7 +73,7 @@
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".view.result.ResultActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

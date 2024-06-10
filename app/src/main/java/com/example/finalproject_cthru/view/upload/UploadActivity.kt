@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
+import com.canhub.cropper.CropImageView
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.data.remote.response.Response
 import com.example.finalproject_cthru.data.remote.retrofit.ApiConfig
@@ -69,30 +74,31 @@ class UploadActivity : AppCompatActivity() {
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if (it.resultCode == Activity.RESULT_OK) {
-            val uriString = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)
-            if (uriString != null) {
-                currentImageUri = Uri.parse(uriString)
-                Log.d("UploadActivity", "Received image URI: $currentImageUri")
-                showImage()
-            } else {
-                Log.e("UploadActivity", "No image URI returned")
-            }
-        } else {
-            Log.e("UploadActivity", "Camera activity result not OK")
+        Log.d("tes", it.resultCode.toString())
+        if (it.resultCode == 200) {
+            Log.d("tes","launch camera x")
+            currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
+            showImage()
+        }
+        else{
+            Log.d("tes","gagal")
         }
     }
 
-//    private var cropImage = registerForActivityResult(
-//        CropImageContract()
-//    ) { result: CropImageView.CropResult ->
-//        if (result.isSuccessful) {
-//            val crop =
-//                BitmapFactory.decodeFile(result.getUriFilePath(applicationContext, true))
-//            binding.uploadImage.setImageBitmap(crop)
-//            currentImageUri = result.uriContent
-//        }
-//    }
+    private var cropImage = registerForActivityResult(
+        CropImageContract()
+    ) { result: CropImageView.CropResult ->
+        if (result.isSuccessful) {
+            val crop =
+                BitmapFactory.decodeFile(result.getUriFilePath(applicationContext, true))
+            binding.uploadImage.setImageBitmap(crop)
+            currentImageUri = result.uriContent
+            // Now upload the cropped image
+            uploadImage()
+        } else {
+            showToast("getString(R.string.crop_failed")
+        }
+    }
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -111,7 +117,7 @@ class UploadActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.galleryButton.setOnClickListener { startGallery() }
-        binding.analyzeButton.setOnClickListener { uploadImage() }
+        binding.analyzeButton.setOnClickListener { cropAndUploadImage() }
         binding.cameraButton.setOnClickListener { startCameraX() }
 
         if (currentImageUri != null) {
@@ -139,7 +145,13 @@ class UploadActivity : AppCompatActivity() {
         launcherIntentCameraX.launch(intent)
     }
 
-    private fun uploadImage(){
+    private fun cropAndUploadImage() {
+        currentImageUri?.let {
+            cropImage(it)
+        } ?: showToast(getString(R.string.empty_image_warning))
+    }
+
+    private fun uploadImage() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image Classification File", "showImage: ${imageFile.path}")
@@ -194,16 +206,16 @@ class UploadActivity : AppCompatActivity() {
         binding.imageView3.visibility = View.GONE
     }
 
-//    private fun cropImage(uri:Uri) {
-//        cropImage.launch(
-//            CropImageContractOptions(
-//                uri = uri,
-//                cropImageOptions = CropImageOptions(
-//                    guidelines = CropImageView.Guidelines.ON
-//                )
-//            )
-//        )
-//    }
+    private fun cropImage(uri: Uri) {
+        cropImage.launch(
+            CropImageContractOptions(
+                uri = uri,
+                cropImageOptions = CropImageOptions(
+                    guidelines = CropImageView.Guidelines.ON
+                )
+            )
+        )
+    }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
