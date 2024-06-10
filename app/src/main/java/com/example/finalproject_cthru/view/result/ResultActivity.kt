@@ -11,6 +11,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.ActivityResultBinding
+import com.example.finalproject_cthru.view.maps.MapsActivity
 import com.example.finalproject_cthru.view.upload.UploadActivity
 
 class ResultActivity : AppCompatActivity() {
@@ -29,6 +30,11 @@ class ResultActivity : AppCompatActivity() {
             // Add any result data if needed
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
+        }
+
+        binding.mapsButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -60,12 +66,6 @@ class ResultActivity : AppCompatActivity() {
             binding.cataractPrediction.setTextColor(resources.getColor(R.color.red))
         } else {
             binding.cataractPrediction.setTextColor(resources.getColor(R.color.blue))
-        }
-
-
-        binding.mapsButton.setOnClickListener {
-            val intent = Intent(this, UploadActivity::class.java)
-            startActivity(intent)
         }
     }
 
