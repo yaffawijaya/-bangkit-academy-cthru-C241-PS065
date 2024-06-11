@@ -13,6 +13,7 @@ import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.ActivityResultBinding
 import com.example.finalproject_cthru.view.login.LoginActivity
 import com.example.finalproject_cthru.view.maps.MapsActivity
+import com.example.finalproject_cthru.view.upload.UploadActivity
 
 class ResultActivity : AppCompatActivity() {
 

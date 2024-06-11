@@ -65,7 +65,7 @@
 
     <string name="password_login">Enter your password</string>
     <string name="password_confirm">Confirm your password</string>
-    <string name="password_forgot">Forgot Password?</string>
+    <string name="password_forgot">Show Password?</string>
     <string name="password_less">Password must be at least 8 characters</string>
     <string name="password_NotMatch">Passwords don\'t match</string>
     <string name="password_AccountWrong">The password you entered is incorrect</string>
@@ -110,8 +110,8 @@
     <string name="detail_desc_article">Lorem ipsum dolor sit amet consectetur. Molestie vel ultrices diam tempus semper sit tincidunt eget blandit. Cras faucibus mattis tortor ut facilisi ullamcorper. Condimentum lectus elit nulla congue. In blandit purus maecenas quis risus volutpat habitant. Integer egestas arcu nunc netus sed lorem porttitor quis</string>
 
     <!--  Result Article Activity  -->
-    <string name="prediction_result">Cataract Confidence:</string>
-    <string name="prediction_confidence">Eye Confidence:</string>
+    <string name="prediction_result">Prediction Result:</string>
+    <string name="prediction_confidence">Prediction Confidence:</string>
     <string name="percent">0%</string>
     <string name="maps_link_buttom">Check the closest medical center</string>
     <string name="recommended_tips">Recommended Tips :</string>
@@ -148,11 +148,12 @@ Pilihlah kacamata hitam yang dapat memblokir setidaknya 99% sinar UV dan berukur
     <string name="logout_profile">Logout</string>
     <string name="settingpref_profile"><![CDATA[Settings & Preferences]]></string>
     <string name="settings_preferences"><![CDATA[Settings & Preferences]]></string>
+    <string name="google_api">AIzaSyCNoFdxkWf5_zdAUTErL7QcenVDHAT6ntE</string>
     <string name="title_history">Today\'s Checkup\n</string>
     <string name="btn_check_history">Let\'s Get Started</string>
     <string name="log_history">Log History</string>
 
     <!--  History Fragment  -->
 
-    <string name="google_api">AIzaSyCNoFdxkWf5_zdAUTErL7QcenVDHAT6ntE</string>
+
 </resources>

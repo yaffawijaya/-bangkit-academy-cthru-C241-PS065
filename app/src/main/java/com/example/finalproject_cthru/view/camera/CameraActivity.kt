@@ -114,9 +114,9 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                    Log.d(TAG, "Image saved at: $savedUri")
+                    Log.d(TAG, "Photo saved to: $savedUri")
                     val intent = Intent()
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
+                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri)
                     setResult(CAMERAX_RESULT, intent)
                     finish()
                 }
