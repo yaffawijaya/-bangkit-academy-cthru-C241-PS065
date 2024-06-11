@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.finalproject_cthru.R
 import com.example.finalproject_cthru.databinding.FragmentHomeBinding
+import com.example.finalproject_cthru.view.article.ArticleActivity
+import com.example.finalproject_cthru.view.detailarticle.DetailArticleActivity
 import com.example.finalproject_cthru.view.onboarding.OnboardingActivity
 import com.example.finalproject_cthru.view.profile.ProfileFragment
 import com.example.finalproject_cthru.view.upload.UploadActivity
@@ -33,15 +35,16 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        // Use binding to access the button
+        val scanButton: Button = binding.scanButton
+        scanButton.setOnClickListener {
+            val intent = Intent(activity, UploadActivity::class.java)
+            startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
         }
 
-        // Use binding to access the button
-        val button: Button = binding.onboardingButton
-        button.setOnClickListener {
-            val intent = Intent(activity, UploadActivity::class.java)
+        val articleButton: Button = binding.articleButton
+        articleButton.setOnClickListener {
+            val intent = Intent(activity, DetailArticleActivity::class.java)
             startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
         }
 

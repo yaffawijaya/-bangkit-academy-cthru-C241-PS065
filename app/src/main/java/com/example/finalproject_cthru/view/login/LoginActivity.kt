@@ -9,26 +9,13 @@ import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.finalproject_cthru.BuildConfig
 import com.example.finalproject_cthru.MainActivity
-import com.example.finalproject_cthru.R
-import com.example.finalproject_cthru.SignInActivity
-import com.example.finalproject_cthru.SignUpActivity
 import com.example.finalproject_cthru.databinding.ActivityLoginBinding
-import com.example.finalproject_cthru.databinding.ActivitySignInBinding
 import com.example.finalproject_cthru.view.register.RegisterActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 

@@ -39,9 +39,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/resultImage"
-                    android:layout_width="400dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/result_image_container"
+                    android:layout_width="350dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="100dp"
                     android:scaleType="centerCrop"
@@ -49,7 +49,16 @@
                     app:layout_constraintHorizontal_bias="0.454"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/eye" />
+                    app:cardCornerRadius="16dp">
+
+                    <ImageView
+                        android:id="@+id/resultImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/eye" />
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/prediction_result_label"
@@ -75,7 +84,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/resultImage" />
+                    app:layout_constraintTop_toBottomOf="@+id/result_image_container" />
 
                 <TextView
                     android:id="@+id/eye_confidence_result"

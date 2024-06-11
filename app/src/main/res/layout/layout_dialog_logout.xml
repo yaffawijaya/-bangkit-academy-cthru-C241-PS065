@@ -15,34 +15,34 @@
             android:id="@+id/tv_text_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_dialog_logout"
+            android:gravity="center"
+            android:text="teks logout"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/btn_cancel_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_doalog_logout_back"
+            android:text="tombol kembali logout"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_logout_dialog"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_logout_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_button_logout"
+            android:text="tombol logout"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/btn_cancel_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/btn_cancel_dialog" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

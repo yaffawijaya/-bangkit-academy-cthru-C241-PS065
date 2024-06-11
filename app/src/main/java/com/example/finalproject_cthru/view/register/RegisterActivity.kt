@@ -9,12 +9,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.finalproject_cthru.R
-import com.example.finalproject_cthru.SignInActivity
 import com.example.finalproject_cthru.databinding.ActivityRegisterBinding
 import com.example.finalproject_cthru.view.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
