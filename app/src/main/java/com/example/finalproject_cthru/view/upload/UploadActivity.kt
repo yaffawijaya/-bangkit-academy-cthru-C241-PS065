@@ -203,16 +203,9 @@ class UploadActivity : AppCompatActivity() {
 
     private fun showImage() {
         currentImageUri?.let {
-            Log.d("UploadActivity", "Displaying image: $it")
-            try {
-                binding.uploadImage.setImageURI(it)
-            } catch (e: Exception) {
-                Log.e("UploadActivity", "Error displaying image: $e")
-                showToast("Error displaying image")
-            }
-        } ?: run {
-            Log.e("UploadActivity", "currentImageUri is null")
-            showToast("No image to display")
+//            cropImage(it)
+            Log.d("Image URI", "showImage: $it")
+            binding.uploadImage.setImageURI(it)
         }
         binding.imageinfo.visibility = View.GONE
         binding.imageView3.visibility = View.GONE
