@@ -11,7 +11,7 @@ data class Response(
 	val message: String? = null
 )
 
-data class Data(
+data class ScanData(
 
 	@field:SerializedName("cataract_confidence")
 	val cataractConfidence: Any? = null,

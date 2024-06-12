@@ -50,23 +50,32 @@ class ResultActivity : AppCompatActivity() {
             binding.resultImage.setImageURI(it)
         }
 
-        val eyeConfidence = bundle?.getDouble(EXTRA_CONFIDENCE_EYE)
-        val formattedEyeConfidence = String.format("%.2f%%", eyeConfidence?.times(100) ?: 0.0)
-        Log.d("Confidence Score", "Eye Confidence: $formattedEyeConfidence")
-        binding.eyeConfidenceResult.text = formattedEyeConfidence
+//        val eyeConfidence = bundle?.getDouble(EXTRA_CONFIDENCE_EYE)
+//        val formattedEyeConfidence = String.format("%.2f%%", eyeConfidence?.times(100) ?: 0.0)
+//        Log.d("Confidence Score", "Eye Confidence: $formattedEyeConfidence")
+//        binding.eyeConfidenceResult.text = formattedEyeConfidence
+//
+//        val cataractConfidence = bundle?.getDouble(EXTRA_CONFIDENCE_CATARACT)
+//        val formattedCataractConfidence =
+//            String.format("%.2f%%", cataractConfidence?.times(100) ?: 0.0)
+//        Log.d("Confidence Score", "Cataract Confidence: $formattedCataractConfidence")
+//        binding.cataractConfidenceResult.text = formattedCataractConfidence
+
+        val eyePrediction = bundle?.getString(EXTRA_PREDICT_CATARACT)
+        binding.eyeConfidenceResult.text = eyePrediction
 
         val cataractConfidence = bundle?.getDouble(EXTRA_CONFIDENCE_CATARACT)
-        val formattedCataractConfidence =
-            String.format("%.2f%%", cataractConfidence?.times(100) ?: 0.0)
+        val formattedCataractConfidence = String.format("%.2f%%", cataractConfidence?.times(100) ?: 0.0)
         Log.d("Confidence Score", "Cataract Confidence: $formattedCataractConfidence")
         binding.cataractConfidenceResult.text = formattedCataractConfidence
 
-        val cataractPrediction = bundle?.getString(EXTRA_PREDICT_CATARACT)
-        binding.cataractPrediction.text = cataractPrediction
-        if (cataractPrediction == "Cataract") {
-            binding.cataractPrediction.setTextColor(resources.getColor(R.color.red))
+
+
+
+        if (eyePrediction == "Cataract") {
+            binding.eyeConfidenceResult.setTextColor(resources.getColor(R.color.red))
         } else {
-            binding.cataractPrediction.setTextColor(resources.getColor(R.color.blue))
+            binding.eyeConfidenceResult.setTextColor(resources.getColor(R.color.blue))
         }
     }
 
