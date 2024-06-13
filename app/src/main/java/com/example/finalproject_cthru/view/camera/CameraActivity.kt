@@ -67,7 +67,7 @@ class CameraActivity : AppCompatActivity() {
             startCamera()
         }
         binding.cameraClose.setOnClickListener { this.onBackPressedDispatcher.onBackPressed() }
-        binding.cameraCapture.setOnClickListener { takePhoto() }
+        binding.photoCapture.setOnClickListener { takePhoto() }
         binding.cameraGallery.setOnClickListener { startGallery() }
 
     }

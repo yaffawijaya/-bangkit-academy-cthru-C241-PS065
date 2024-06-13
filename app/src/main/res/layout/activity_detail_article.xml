@@ -8,19 +8,6 @@
     android:background="@drawable/overlay_gradients"
     tools:context=".view.detailarticle.DetailArticleActivity">
 
-    <ImageView
-        android:id="@+id/camera_capture"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/btn_arrow_back_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/article_image_container"
         android:layout_width="0dp"
@@ -50,7 +37,7 @@
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_bold_700"
         android:text="@string/detail_title_article"
@@ -59,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_capture" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_back_detailarticle" />
 
     <TextView
         android:id="@+id/textView2"
@@ -76,4 +63,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/article_image_container"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/btn_back_detailarticle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_arrow_back_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

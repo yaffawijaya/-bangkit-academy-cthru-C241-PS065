@@ -48,6 +48,8 @@ class HomeFragment : Fragment() {
             startActivityForResult(intent, EDIT_PROFILE_REQUEST_CODE)
         }
 
+        backHome()
+
         return root
     }
 
@@ -62,6 +64,13 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun backHome(){
+        binding.detailMove.setOnClickListener{
+            val intent = Intent(requireActivity(), ArticleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     companion object {

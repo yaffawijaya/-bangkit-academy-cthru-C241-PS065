@@ -1,5 +1,7 @@
 package com.example.finalproject_cthru.view.detailarticle
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +20,23 @@ class DetailArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        backHome()
+
+    }
+
+    private fun backHome(){
+        binding.btnBackDetailarticle.setOnClickListener{
+            val resultIntent = Intent()
+            // Add any result data if needed
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 
     companion object {
         const val EXTRA_USER = "extra_user"
     }
+
+
 }

@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/camera_capture"
+        android:id="@+id/photo_capture"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="48dp"
@@ -50,10 +50,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/btn_bg_black"
-        app:layout_constraintBottom_toBottomOf="@+id/camera_capture"
+        app:layout_constraintBottom_toBottomOf="@+id/photo_capture"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/camera_capture"
-        app:layout_constraintTop_toTopOf="@id/camera_capture"
+        app:layout_constraintStart_toEndOf="@+id/photo_capture"
+        app:layout_constraintTop_toTopOf="@id/photo_capture"
         app:srcCompat="@drawable/btn_switch_camera" />
 
     <ImageButton
@@ -65,10 +65,10 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_bg_black"
         android:src="@drawable/btn_photo"
-        app:layout_constraintBottom_toBottomOf="@id/camera_capture"
-        app:layout_constraintEnd_toStartOf="@+id/camera_capture"
+        app:layout_constraintBottom_toBottomOf="@id/photo_capture"
+        app:layout_constraintEnd_toStartOf="@+id/photo_capture"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/camera_capture"
+        app:layout_constraintTop_toTopOf="@id/photo_capture"
         app:layout_constraintVertical_bias="0.437" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
