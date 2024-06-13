@@ -2,6 +2,7 @@ package com.example.finalproject_cthru.view.article
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -20,11 +21,13 @@ import com.example.finalproject_cthru.data.remote.response.ArticlesItem
 import com.example.finalproject_cthru.databinding.ActivityArticleBinding
 import com.example.finalproject_cthru.view.adapter.ArticleAdapter
 import com.example.finalproject_cthru.view.detailarticle.DetailArticleActivity
+import com.example.finalproject_cthru.view.result.ResultActivity
 
 class ArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArticleBinding
     private val articleViewModel by viewModels<ArticleViewModel>()
     private lateinit var adapter: ArticleAdapter
+    private var articleImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class ArticleActivity : AppCompatActivity() {
 
         adapter = ArticleAdapter()
         setupSearchBar()
-        setupRecyclerView() // Fixed typo in the function name
+        setupRecyclerView()
         observeLiveData()
     }
 
@@ -44,6 +47,8 @@ class ArticleActivity : AppCompatActivity() {
             } else {
                 // Handle empty or null list of articles
                 Log.e("ArticleActivity", "No articles found")
+                // You can also update the UI to indicate no articles found
+//                binding.emptyView.visibility = View.VISIBLE
             }
         }
         articleViewModel.isLoading.observe(this) { isLoading ->
@@ -52,15 +57,16 @@ class ArticleActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun setArticles(articles: List<ArticlesItem>) {
         // Do not recreate the adapter, just update the data
         adapter.submitList(articles)
+//        binding.emptyView.visibility = if (articles.isEmpty()) View.VISIBLE else View.GONE
     }
 
-    private fun setupRecyclerView() { // Fixed typo in the function name
+    private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvAdapter.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
@@ -71,7 +77,9 @@ class ArticleActivity : AppCompatActivity() {
         adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
             override fun onItemClicked(data: ArticlesItem) {
                 val intent = Intent(this@ArticleActivity, DetailArticleActivity::class.java)
-                intent.putExtra(DetailArticleActivity.EXTRA_USER, data)
+                intent.putExtra(DetailArticleActivity.EXTRA_TITLE, data.title)
+                intent.putExtra(DetailArticleActivity.EXTRA_DESCRIPTION, data.description)
+                intent.putExtra(DetailArticleActivity.EXTRA_IMAGE_URI, data.urlToImage)
                 startActivity(intent)
             }
         })
@@ -82,8 +90,8 @@ class ArticleActivity : AppCompatActivity() {
             searchView.setupWithSearchBar(SearchBar)
             searchView.editText.setOnEditorActionListener { _, _, _ ->
                 val query = binding.searchView.text.toString()
-                // mainViewModel.getDataSearch(query)
-                // SearchBar.text = searchView.text
+                // Trigger the search functionality here
+                // articleViewModel.searchArticles(query)
                 binding.searchView.hide()
                 true
             }

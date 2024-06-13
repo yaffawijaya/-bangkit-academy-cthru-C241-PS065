@@ -32,7 +32,7 @@ class ArticleAdapter : ListAdapter<ArticlesItem, ArticleAdapter.ViewHolder>(DIFF
                 .into(binding.newsImage)
 
             binding.newsTitle.text = article.title ?: ""
-            binding.newsDescription.text = article.description?.toString() ?: ""
+            binding.newsDate.text = article.publishedAt ?: ""
         }
     }
 
