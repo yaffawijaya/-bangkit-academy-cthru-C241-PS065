@@ -155,5 +155,14 @@ Pilihlah kacamata hitam yang dapat memblokir setidaknya 99% sinar UV dan berukur
 
     <!--  History Fragment  -->
 
+    <!--  Home Fragment  -->
+    <string name="scan_home">Let\'s Get Started</string>
+    <string name="let_s_check_it_up">Let\'s Check It Up</string>
+    <string name="home_article">Article</string>
+    <string name="home_see_more">See more</string>
+    <string name="welcome_home">Welcome,</string>
+    <string name="home_articles">Articles</string>
+    <string name="user_home">User</string>
+
 
 </resources>
