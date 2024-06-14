@@ -1,5 +1,6 @@
 package com.example.finalproject_cthru.view.article
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -11,17 +12,22 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject_cthru.MainActivity
 import com.example.finalproject_cthru.R
+import com.example.finalproject_cthru.data.remote.response.ArticleResponse
 import com.example.finalproject_cthru.data.remote.response.ArticlesItem
 import com.example.finalproject_cthru.databinding.ActivityArticleBinding
 import com.example.finalproject_cthru.view.adapter.ArticleAdapter
 import com.example.finalproject_cthru.view.detailarticle.DetailArticleActivity
 import com.example.finalproject_cthru.view.result.ResultActivity
+import com.google.gson.Gson
+import java.io.File
+import java.io.InputStreamReader
 
 class ArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArticleBinding
@@ -34,13 +40,25 @@ class ArticleActivity : AppCompatActivity() {
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        printResponse(this)
         adapter = ArticleAdapter()
         setupSearchBar()
         setupRecyclerView()
         observeLiveData()
     }
 
+//    fun printResponse(context: Context) {
+//        val inputStream = context.resources.openRawResource(R.raw.article)
+//        val reader = InputStreamReader(inputStream)
+//
+//        val articles = Gson().fromJson(reader, ArticleResponse::class.java)
+//
+//        println(articles)
+//        reader.close()
+//    }
+
     private fun observeLiveData() {
+        articleViewModel.setMockData(this)
         articleViewModel.articles.observe(this) { articles ->
             if (articles != null && articles.isNotEmpty()) {
                 setArticles(articles)

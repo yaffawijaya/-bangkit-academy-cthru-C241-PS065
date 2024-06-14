@@ -1,8 +1,10 @@
 package com.example.finalproject_cthru.data.remote.response
 
-import android.os.Parcelable
+import android.content.Context
+import com.example.finalproject_cthru.R
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import java.io.InputStreamReader
 
 data class ArticleResponse(
 
@@ -14,9 +16,17 @@ data class ArticleResponse(
 
 	@field:SerializedName("status")
 	val status: String? = null
-)
+) {
+	companion object {
+		fun setMockData(context: Context): List<ArticlesItem>? {
+			val inputStream = context.resources.openRawResource(R.raw.article)
+			val reader = InputStreamReader(inputStream)
+			val articleResponse = Gson().fromJson(reader, ArticleResponse::class.java)
+			return articleResponse.articles as List<ArticlesItem>?
+		}
+	}
+}
 
-@Parcelize
 data class ArticlesItem(
 
 	@field:SerializedName("publishedAt")
@@ -32,7 +42,7 @@ data class ArticlesItem(
 	val description: String? = null,
 
 	@field:SerializedName("source")
-	val source: String? = null,
+	val source: Source? = null,
 
 	@field:SerializedName("title")
 	val title: String? = null,
@@ -41,11 +51,8 @@ data class ArticlesItem(
 	val url: String? = null,
 
 	@field:SerializedName("content")
-	val content: String? = null
-): Parcelable
-
-
-
+	val content: Any? = null
+)
 
 data class Source(
 

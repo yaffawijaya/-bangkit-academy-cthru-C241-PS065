@@ -32,7 +32,7 @@ class DetailArticleActivity : AppCompatActivity() {
 
         Glide.with(binding.root)
             .load(image)
-            .apply(RequestOptions().centerCrop().placeholder(R.drawable.ic_place_holder))
+            .apply(RequestOptions().override(1200, 800).placeholder(R.drawable.ic_place_holder))
             .into(binding.articleImage)
 
 

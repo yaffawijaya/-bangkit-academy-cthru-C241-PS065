@@ -96,6 +96,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeLiveData() {
+        homeViewModel.setMockData(requireContext())
         homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
             if (articles != null && articles.isNotEmpty()) {
                 setArticles(articles)

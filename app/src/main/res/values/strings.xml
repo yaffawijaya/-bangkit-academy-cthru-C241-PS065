@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject_CThru</string>
+    <string name="app_name">CThru</string>
     <string name="sign_in_button">Sign In</string>
     <string name="password_hint">Type Your Password</string>
     <string name="email_hint">Type your Email</string>
