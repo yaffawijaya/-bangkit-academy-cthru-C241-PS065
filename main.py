@@ -98,7 +98,7 @@ async def predict_endpoint(file: UploadFile = File(...)):
         logger.error(f"Error during prediction: {e}")
         raise HTTPException(status_code=500, detail=f"An error occurred during prediction: {e}")
 
-if __name__ == "__main__":
-    import uvicorn
-    import os
-    uvicorn.run(port=int(os.environ.get("PORT", 8080)),host='0.0.0.0',debug=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     import os
+#     uvicorn.run(port=int(os.environ.get("PORT", 8080)),host='0.0.0.0',debug=True)
