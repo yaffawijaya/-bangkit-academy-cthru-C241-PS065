@@ -1,5 +1,7 @@
 FROM python:3.9
 
+ENV PYTHONUNBUFFERED True
+
 RUN apt-get update && apt-get install -y libhdf5-dev
 
 WORKDIR /code
@@ -12,6 +14,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]

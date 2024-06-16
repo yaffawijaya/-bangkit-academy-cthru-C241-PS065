@@ -9,21 +9,21 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load cataract detection model
-def load_model(model_url, model_name):
-    try:
-        model_path = tf.keras.utils.get_file(model_name, origin=model_url)
-        model = tf.keras.models.load_model(model_path)
-        # logger.info(f"{model_name} loaded successfully.")
-        return model
-    except Exception as e:
-        logger.error(f"Error loading {model_name}: {e}")
-        raise e
+# def load_model(model_url, model_name):
+#     try:
+#         model_path = tf.keras.utils.get_file(model_name, origin=model_url)
+#         model = tf.keras.models.load_model(model_path)
+#         # logger.info(f"{model_name} loaded successfully.")
+#         return model
+#     except Exception as e:
+#         logger.error(f"Error loading {model_name}: {e}")
+#         raise e
 
 # Cataract detection model
-model_cataract = load_model('https://storage.googleapis.com/cthru-project-models/cataract-VGG16.h5', 'cataract-VGG16.h5')
+model_cataract = tf.keras.models.load_model('cataract-VGG16.h5')
 
 # Eye validation model
-model_eye = load_model('https://storage.googleapis.com/cthru-project-models/eyeval-VGG16.h5', 'eyeval-VGG16.h5')
+model_eye = tf.keras.models.load_model('eyeval-VGG16.h5')
 
 # Read Image:
 def read_image(file: bytes) -> Image.Image:
