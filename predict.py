@@ -8,16 +8,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Read Image
-def read_image(file: bytes) -> Image.Image:
-    try:
-        pil_image = Image.open(BytesIO(file))
-        logger.info("Image read successfully in read_image function.")
-        return pil_image
-    except Exception as e:
-        logger.error(f"Error reading image: {e}")
-        raise e
-
 # Load cataract detection model
 try:
     model_cataract_url = 'https://storage.googleapis.com/cthru-project-models/cataract-VGG16.h5'
