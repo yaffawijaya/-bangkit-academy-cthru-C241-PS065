@@ -9,24 +9,31 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load cataract detection model
-try:
-    model_cataract_url = 'https://storage.googleapis.com/cthru-project-models/cataract-VGG16.h5'
-    model_cataract_path = tf.keras.utils.get_file('cataract-VGG16.h5', origin=model_cataract_url)
-    model_cataract = tf.keras.models.load_model(model_cataract_path)
-    logger.info("Cataract detection model loaded successfully.")
-except Exception as e:
-    logger.error(f"Error loading cataract detection model: {e}")
-    raise e
+def load_model(model_url, model_name):
+    try:
+        model_path = tf.keras.utils.get_file(model_name, origin=model_url)
+        model = tf.keras.models.load_model(model_path)
+        # logger.info(f"{model_name} loaded successfully.")
+        return model
+    except Exception as e:
+        logger.error(f"Error loading {model_name}: {e}")
+        raise e
 
-# Load eye validation model
-try:
-    model_eye_url = 'https://storage.googleapis.com/cthru-project-models/eyeval-VGG16.h5'
-    model_eye_path = tf.keras.utils.get_file('eyeval-VGG16.h5', origin=model_eye_url)
-    model_eye = tf.keras.models.load_model(model_eye_path)
-    logger.info("Eye validation model loaded successfully.")
-except Exception as e:
-    logger.error(f"Error loading eye validation model: {e}")
-    raise e
+# Cataract detection model
+model_cataract = load_model('https://storage.googleapis.com/cthru-project-models/cataract-VGG16.h5', 'cataract-VGG16.h5')
+
+# Eye validation model
+model_eye = load_model('https://storage.googleapis.com/cthru-project-models/eyeval-VGG16.h5', 'eyeval-VGG16.h5')
+
+# Read Image:
+def read_image(file: bytes) -> Image.Image:
+    try:
+        pil_image = Image.open(BytesIO(file))
+        # logger.info("Image read successfully.")
+        return pil_image
+    except Exception as e:
+        logger.error(f"Error reading image: {e}")
+        raise e
 
 # Cataract model async function
 async def predict_cataract(image: Image.Image):
@@ -45,9 +52,10 @@ async def predict_cataract(image: Image.Image):
         
         return data
     except Exception as e:
-        logger.error(f"Error in predict_cataract function: {e}")
+        # logger.error(f"Error in predict_cataract function: {e}")
         raise e
 
+# Eye validation async function
 async def predict_eye(image: Image.Image):
     try:
         image_array = np.array(image.resize((224, 224))) / 255.0

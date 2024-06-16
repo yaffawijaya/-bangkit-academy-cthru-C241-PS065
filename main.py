@@ -10,11 +10,9 @@ from datetime import datetime
 # Import functions from predict.py
 from predict import read_image, predict_eye, predict_cataract
 
-
 # Configure firebase credentials
 cred = credentials.Certificate('credentials.json')
 firebase_admin.initialize_app(cred)
-
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -33,19 +31,17 @@ app.add_middleware(
 
 # Initialize Firestore client
 try:
-    db = firestore.Client()
-    items_collection = db.collection('detections').document()
+    db = firestore.client()
     logger.info("Connected to Firestore successfully.")
 except Exception as e:
     logger.error(f"Error connecting to Firestore: {e}")
 
-# home endpoint
+# Home endpoint
 @app.get("/")
 async def root():
     return {"message": "Hello CThru!"}
 
-
-# prediction endpoint, contains model prediction
+# Prediction endpoint, contains model prediction
 @app.post("/predict/")
 async def predict_endpoint(file: UploadFile = File(...)):
     try:
@@ -59,10 +55,12 @@ async def predict_endpoint(file: UploadFile = File(...)):
 
         if eye_detection["detection"] == "Non-eye":
             return JSONResponse(content={
-                "message": "Eye is not detected", 
-                "data": 
-                    {"detection": "Non-eye", 
-                     "confidence": eye_detection["confidence"]}})
+                "message": "Eye is not detected",
+                "data": {
+                    "detection": "Non-eye",
+                    "confidence": eye_detection["confidence"]
+                }
+            })
         else:
             # Cataract detection
             cataract_detection = await predict_cataract(image)
@@ -86,8 +84,9 @@ async def predict_endpoint(file: UploadFile = File(...)):
 
             # Store prediction result in Firestore
             try:
-                doc_ref = items_collection
+                doc_ref = db.collection('detections').document(id_value)
                 doc_ref.set(data)
+                # logger.info(f"Data stored successfully with id: {id_value}")
             except Exception as e:
                 logger.error(f"Error storing data in Firestore: {e}")
                 raise HTTPException(status_code=500, detail="Error storing data in Firestore")
