@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
+import requests
 import logging
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -9,6 +10,15 @@ from datetime import datetime
 
 # Import functions from predict.py
 from predict import read_image, predict_eye, predict_cataract
+
+# Step 1: Download the JSON file from the URL
+url = 'https://storage.googleapis.com/cthru-project-models/credentials.json'
+response = requests.get(url)
+if response.status_code == 200:
+    with open('credentials.json', 'wb') as file:
+        file.write(response.content)
+else:
+    raise Exception(f"Failed to download the file. Status code: {response.status_code}")
 
 # Configure firebase credentials
 cred = credentials.Certificate('credentials.json')
