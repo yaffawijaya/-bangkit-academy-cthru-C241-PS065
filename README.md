@@ -1,7 +1,7 @@
 # Welcome to CThru Documentation
 ### We are from Bangkit Academy Capstone Project Team (C241-PS065)
 
-Welcome to the -bangkit-academy-cthru-C241-PS065 repository. This repository contains documentation and code for various learning paths within the Bangkit Academy program.
+This repository contains documentation and code for various learning paths within the Bangkit Academy program.
 
 ## Branches Overview
 
