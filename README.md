@@ -1,4 +1,8 @@
 # Welcome to CThru Documentation
+
+![cthru-logo](https://github.com/yaffawijaya/bangkit-academy-cthru-C241-PS065/assets/109704982/5326eba1-5631-4ca9-b07a-464cdd17faa2)
+
+
 ### We are from Bangkit Academy Capstone Project Team (C241-PS065)
 
 This repository contains documentation and code for various learning paths within the Bangkit Academy program.
