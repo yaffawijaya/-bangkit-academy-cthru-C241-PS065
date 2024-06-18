@@ -38,3 +38,13 @@ git clone -b machine-learning https://github.com/yaffawijaya/bangkit-academy-cth
 
 
 Thank you for visiting our repository. We hope you find the documentation helpful!
+
+
+# Developer:
+- **Sandyatama Fransisna Nugraha** (Android Developer)
+- **Arkana Bilal Imani** (Android Developer)
+- **Tabina Shafa Nabila Syahda** (Machine Learning Engineer)
+- **Afeef Radithya Rashid** (Machine Learning Engineer)
+- **Dimitri Aulia Rasyidin** (Machine Learning Engineer)
+- **Doan Carlos Embara** (Cloud Engineer)
+- **Yaffazka Afazillah Wijaya** (Cloud Engineer)
