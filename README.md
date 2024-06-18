@@ -1,4 +1,4 @@
-# Cataract Detection - Machine Learning Model APIs
+# Cataract Detection - Machine Learning Model APIs for Backend Application
 
 This project provides a simple API for predictions. It uses FastAPI and is designed to be run locally.
 
