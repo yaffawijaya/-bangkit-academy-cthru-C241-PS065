@@ -1,6 +1,6 @@
 # Welcome to CThru Documentation
 
-![cthru-logo](https://github.com/yaffawijaya/bangkit-academy-cthru-C241-PS065/assets/109704982/5326eba1-5631-4ca9-b07a-464cdd17faa2)
+![cthru-logo](https://github.com/yaffawijaya/bangkit-academy-cthru-C241-PS065/assets/109704982/531642dd-7e17-4c84-8de7-ffe34d602348)
 
 
 ### We are from Bangkit Academy Capstone Project Team (C241-PS065)
