@@ -16,7 +16,7 @@ Each learning path has its own dedicated branch. Switch to the respective branch
 1. **Clone the Repository**:
     ```bash
     git clone https://github.com/yaffawijaya/-bangkit-academy-cthru-C241-PS065.git
-    cd -bangkit-academy-cthru-C241-PS065
+    cd bangkit-academy-cthru-C241-PS065
     ```
 
 2. **Switch to a Branch**:
